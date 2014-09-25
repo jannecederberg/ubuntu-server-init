@@ -1,0 +1,3 @@
+---
+oldHostname: "{{ lookup('file', '/etc/hostname') }}"
+

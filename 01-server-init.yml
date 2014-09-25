@@ -1,0 +1,8 @@
+---
+- name: Initialize Ubuntu server
+  hosts: all
+  remote_user: root
+  roles:
+    - update
+    - secure
+    - shell

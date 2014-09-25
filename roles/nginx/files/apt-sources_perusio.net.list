@@ -1,0 +1,7 @@
+
+# Perusio's Nginx repository for state-of-the-art
+# http://debian.perusio.net/debian.html#quickstart
+#   - required for FLV & MP4 pseudo-streaming
+
+deb http://debian.perusio.net unstable/
+deb-src http://debian.perusio.net unstable/

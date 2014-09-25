@@ -1,0 +1,23 @@
+## Variables for all servers 
+
+# General
+admin:
+    username: <username>
+    email: <email>
+    # Create password using: "openssl passwd -salt <salt> -1 <plaintext-password>"
+    password: <passhash>
+    gitconfig:
+        name: <name>
+        email: <email>
+
+ssh:
+    set_port_to: <port>
+
+fail2ban:
+    ignoreip: 127.0.0.1/8
+    bantime: 15
+
+# https://help.ubuntu.com/community/CustomizingBashPrompt
+# http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux
+shell:
+    prompt_color: \[\033[41m\]

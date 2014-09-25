@@ -1,0 +1,44 @@
+---
+- name: Change prompt color
+  template: src=bashrc.j2 dest=/home/{{ admin.username }}/.bashrc
+              owner={{ admin.username }} group={{ admin.username }} mode=0644
+
+- name: Create new hostname file
+  template: src=hostname.j2 dest=/etc/hostname
+          owner=root group=root mode=0644
+
+- name: Replace the old hostname in /etc/hosts with the new one
+  replace: dest=/etc/hosts
+           regexp='127\.0\.1\.1.*'
+           replace='127.0.1.1\t{{ serverName }}'
+           backup=yes
+
+- name: Update hostname from the file
+  command: hostname -F /etc/hostname
+
+- name: Install default software
+  apt: pkg={{ item }} state=installed
+  with_items:
+   - byobu
+   - curl
+   - discus
+   - git
+   - htop
+   - iotop
+   - libcurl3
+   - patch
+   - screen
+   - sysstat
+   - tmux
+   - unzip
+   - vim
+
+- name: Add bash aliases
+  template:
+    src=bash_aliases.j2
+    dest=/home/{{ admin.username }}/.bash_aliases
+    owner={{ admin.username }} group={{ admin.username }} mode=0644
+
+- name: Configure git 
+  template: src=gitconfig.j2 dest=/home/{{ admin.username }}/.gitconfig
+            owner={{ admin.username }} group={{ admin.username }} mode=0644

@@ -1,0 +1,8 @@
+---
+- name: Activate firewall rules
+  hosts: all
+  remote_user: "{{ admin.username }}"
+  sudo: yes
+  tasks:
+    - name: Importing firewall rules using iptables-restore
+      shell: iptables-restore < /etc/iptables.firewall.rules

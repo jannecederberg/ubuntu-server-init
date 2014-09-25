@@ -1,0 +1,26 @@
+---
+# See: http://debian.perusio.net/debian.html#quickstart
+
+- name: Copy /etc/apt/sources.list.d/perusio.net.list for Nginx
+  copy: src=apt-sources_perusio.net.list
+        dest=/etc/apt/sources.list.d/perusio.net.list
+
+- name: Add Perusio's GPG key to the apt GnuPG keyring
+  # apt-key adv --recv-keys --keyserver keys.gnupg.net add 4D722217
+  apt_key: id=4D722217 url=https://keys.gnupg.net state=present
+
+- name: Update apt cache to get Perusio's Nginx version
+  apt: update_cache=yes
+
+- name: Install Nginx
+  apt: name=nginx state=latest
+  notify:
+    - restart nginx
+
+- name: Move /etc/nginx to /etc/nginx.old
+  command: creates="/etc/nginx.old" mv /etc/nginx /etc/nginx.old
+
+- name: Git clone Perusio's Nginx config
+  git: repo=https://github.com/perusio/wordpress-nginx.git
+       dest=/etc/nginx
+

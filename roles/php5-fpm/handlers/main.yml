@@ -1,0 +1,5 @@
+- name: restart mysql
+  action: service name=mysql state=restarted
+
+- name: restart php5-fpm
+  action: service name=php5-fpm state=restarted

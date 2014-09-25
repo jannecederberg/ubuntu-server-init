@@ -1,0 +1,22 @@
+---
+- name: Update apt package cache (apt-get update)
+  apt: update_cache=yes
+
+- name: Update installed software (apt-get upgrade)
+  apt: upgrade=full
+  when: update_upgrade
+
+- name: Set timezone config file
+  template:
+    src=timezone.j2
+    dest=/etc/timezone
+  notify: update timezone
+
+# Message of the day explaining server is under control of Ansible.
+- name: Add MOTD explaining server is under Ansible control
+  template:
+    src=motd-ansible.j2
+    dest=/etc/update-motd.d/95-ansible
+    owner=root
+    group=root
+    mode=755
