@@ -21,3 +21,6 @@ fail2ban:
 # http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux
 shell:
     prompt_color: \[\033[41m\]
+
+mysql:
+    root_password: <passwd>
