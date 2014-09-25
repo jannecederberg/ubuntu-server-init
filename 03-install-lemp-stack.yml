@@ -1,0 +1,9 @@
+---
+- name: "Install Nginx, PHP and MySQL"
+  hosts: all
+  remote_user: "{{ admin.username }}"
+  sudo: yes
+  roles:
+    - nginx
+    - php5-fpm
+    - mysql
